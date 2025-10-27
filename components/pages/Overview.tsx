@@ -1,9 +1,8 @@
-
 import React from 'react';
-import { useApp } from '../context/AppContext';
-import Icon from './Icon';
+import { useApp } from '../../context/AppContext';
+import Icon from '../Icon';
 
-const Dashboard: React.FC = () => {
+const Overview: React.FC = () => {
     const { focusMode } = useApp();
 
     return (
@@ -34,4 +33,4 @@ const Dashboard: React.FC = () => {
     );
 };
 
-export default Dashboard;
+export default Overview;

@@ -1,10 +1,12 @@
-
 import React from 'react';
 import Icon from './Icon';
-import { NAV_ITEMS } from '../constants';
+import { ALL_NAV_ITEMS } from '../constants';
+import { useApp } from '../context/AppContext';
 
 const Sidebar: React.FC = () => {
-  const activeItem = 'Chat';
+  const { theme, activeView, setActiveView } = useApp(); // Get activeView and setter
+
+  const navItems = ALL_NAV_ITEMS;
 
   return (
     <aside className="hidden md:flex flex-col w-64 bg-slate-800 text-slate-100">
@@ -13,19 +15,19 @@ const Sidebar: React.FC = () => {
         <h1 className="text-2xl font-bold ml-2">Advisor AI</h1>
       </div>
       <nav className="flex-1 px-4 py-6 space-y-2">
-        {NAV_ITEMS.map((item) => (
-          <a
+        {navItems.map((item) => (
+          <button // Change from <a> to <button>
             key={item.name}
-            href={item.path}
-            className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 ${
-              item.name === activeItem
-                ? 'bg-indigo-600 text-white'
+            onClick={() => setActiveView(item.name)} // Set active view on click
+            className={`w-full flex items-center px-4 py-2 rounded-lg transition-colors duration-200 text-left ${
+              item.name === activeView // Use activeView for styling
+                ? `bg-dept-accent text-white`
                 : 'text-slate-400 hover:bg-slate-700 hover:text-white'
             }`}
           >
             <Icon type={item.icon} className="w-5 h-5" />
             <span className="ml-3">{item.name}</span>
-          </a>
+          </button>
         ))}
       </nav>
       <div className="px-4 py-4 border-t border-slate-700">
